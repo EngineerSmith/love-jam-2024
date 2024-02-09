@@ -1,0 +1,29 @@
+name: continuous builds
+on: [push, pull_request]
+
+jobs:
+  build-trade_map:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        love_version: ['12.0']
+    steps:
+    - uses: actions/checkout@v3
+    - uses: engineersmith/love-build@master
+      id: love-build
+      with:
+        app_name: 'love-jam-2024'
+        love_version: ${{ matrix.love_version }}
+    - uses: actions/upload-artifact@v1
+      with:
+        name: jam_win64
+        path: ${{ steps.love-build.outputs.win64-filename }}
+    - uses: actions/upload-artifact@v1
+      with:
+        name: jam_macOS
+        path: ${{ steps.love-build.outputs.macos-filename }}
+    - uses: actions/upload-artifact@v1
+      with:
+        name: jam_win32
+        path: ${{ steps.love-build.outputs.win32-filename }}
