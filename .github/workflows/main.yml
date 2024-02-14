@@ -2,7 +2,7 @@ name: continuous builds
 on: [push, pull_request]
 
 jobs:
-  build-trade_map:
+  build-jam:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
