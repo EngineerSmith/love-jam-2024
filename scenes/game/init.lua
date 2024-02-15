@@ -48,7 +48,7 @@ scene.resize = function(w, h)
 end
 
 scene.update = function(dt)
-  if mintHive.isClient then
+  if mintHive.isClient() then
     scene.ui.update(dt)
   end
 end

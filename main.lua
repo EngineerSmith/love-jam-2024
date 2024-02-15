@@ -1,3 +1,11 @@
+local logger = require("util.logger")
+
+if love._version_major ~= 12 then
+  logger.fatal("Version error", "Project requires love 12  g\0")
+  os.exit(1)
+  return 1
+end
+
 local love = love
 local le, lg, ltr, lfs, lw = love.event, love.graphics, love.timer, love.filesystem, love.window
 
@@ -7,7 +15,6 @@ local sceneManager = require("util.sceneManager")
 local utf8 = require("util.utf8")
 local flux = require("libs.flux")
 local lang = require("util.lang")
-local logger = require("util.logger")
 local settings = require("util.settings")
 
 local localFound, selectLang
