@@ -20,6 +20,7 @@ return function(coordinator)
     if len > 100 then
       message = utf8.sub(message, 1, 100)
     end
+    logger.info("Chat:", client.username, ":", message)
     coordinator.serverSendChatMessage({
       coordinator.color.username, client.username, coordinator.color.white, ": "..message
     })

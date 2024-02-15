@@ -19,7 +19,7 @@ return function(ui)
   mintHive.server.addHandler("login", function(client)
     if ui.scene.unloaded then return end
     logger.info(client.username, "has joined!")
-    chatCoordinator.sendChatMessage({
+    chatCoordinator.serverSendChatMessage({
       chatCoordinator.color.username, client.username, chatCoordinator.color.notification, lang.getText("chat.notification.join")
     })
   end)
@@ -27,7 +27,7 @@ return function(ui)
   mintHive.server.addHandler("disconnect", function(client)
     if ui.scene.unloaded then return end
     logger.info(client.username, "has left")
-    chatCoordinator.sendChatMessage({
+    chatCoordinator.serverSendChatMessage({
       chatCoordinator.color.username, client.username, chatCoordinator.color.notification, lang.getText("chat.notification.left")
     })
   end)

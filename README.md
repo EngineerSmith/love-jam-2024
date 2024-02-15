@@ -29,3 +29,57 @@ To access your newly added asset within a lua file. It's quite simple. They are 
 local assets = require("util.assets")
 assets[name]
 ```
+
+### For developers
+Check out `util.lilyloader` for how it uses lily and extensions to determines which function to use to load an asset.
+
+## Arguments
+There are a few arguments that you can use to speed up development. These are used when you run the program. The ones to remember are: `love . --speed` for the client, and for the server `love . --server`. These work with the fused project too `love-jam-2024.exe --speed`
+
+* `--speed` Will skip the intro-scenes, as soon as all assets are loaded.
+* `--server` Used to start a server instead of a client
+* `--log [file name: log.txt]` will add a logging sink, to save logs
+  * e.g. `--log` saves to save_directory/log.txt, `--log mylogs.txt` saves to save_directory/mylogs.txt
+* `--settings <file name>` used to use a different file for settings than the default save_directory/settings.json
+
+### How to use arguments
+```lua
+local args = require("util.args")
+
+-- no arguments, will just make it a boolean
+args["--keyword"]
+-- if it has arguments, it will be a table array
+local var = "default"
+if type(args["--keyword"]) == "table" then
+  var = args["--keyword"][1]
+end
+```
+
+## Language
+You can add language keys to `en.json`, and the access them with the following.
+```lua
+local lang = require("util.lang")
+local str = lang.getText("my.key")
+-- for text, with variables
+  -- e.g. 'my.key': 'My cat's name is $1. $2 $1'
+local str = lang.getText("my.key", 'Pizza', 'I love') -- 'My cat's name is Pizza. I love Pizza'
+```
+
+## Logging
+The project includes a basic logging system
+```lua
+local logger = require("util.logger")
+
+-- Logger contains a few basic functions. The different levels, just use different prefixes and colors (where consoles support colors)
+logger.info()
+logger.warn()
+logger.error()
+logger.fatal() -- fatal, will show a message box and close the program
+logger.unknown()
+
+-- They all work similar to print, in that they can take in multiple values
+logger.info("What have I done wrong", type(variable1), variable1)
+
+-- Note, if you call print()
+-- it will redirect to logger.unknown
+```

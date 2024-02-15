@@ -67,10 +67,10 @@ local getFormattedTime = function()
 end
 
 logger.file = nil
-if args["-log"] then
+if args["--log"] then
   local file = "log.txt"
-  if type(args["-log"]) == "table" then
-    file = args["-log"][1]
+  if type(args["--log"]) == "table" then
+    file = args["--log"][1]
   end
   
   if not lfs.getInfo(file, "file") then
