@@ -8,6 +8,12 @@ This is the project for [Love-Jam-2024](https://itch.io/jam/love2d-jam-2024)
 2. Clone your fork to your machine!
 3. Open the repo in your love2d developing environment of choice
 
+4. Make sure you're using latest love 12 ([get it from here](https://github.com/love2d/love/actions/runs/7895106111#artifacts))
+   * Download, and put into your love directory. You may want to temporarily move your current install into a subfolder so you can switch to it again after the jam
+5. Open the directory in file explorer, and in the address bar type `cmd` to open a console
+6. To run the project, type `love .` into the console. You can add `--speed` after the period to skip the intro scene
+   * `love . --speed`
+
 Now I recommend you get use to the code base by looking around. I first recommend to check out how the chat is implement. Key files can be found at `coordinator.chat` and `scenes.game.ui.chat`. Use this system as a base of how you should write, and design systems for the game.
 
 ### Contributing
