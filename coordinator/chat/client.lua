@@ -14,7 +14,7 @@ return function(coordinator)
 
   coordinator.sendChatMessage = function(message)
       if network.isConnected then
-        network.send("chatMessage", message)
+        network.send(coordinator.toServer, message)
       end
     end
 
@@ -26,10 +26,7 @@ return function(coordinator)
   coordinator.clear = function()
       coordinator.chat.clear()
     end
-  
-  network.addHandler("chatMessage", coordinator.addChatMessage)
 
-  network.addHandler("disconnect", function(reason, code)
-      coordinator.addChatMessage("Disconnected. Reason: "..tostring(reason)..", Code: "..tostring(code))
-    end)
+  network.addHandler(coordinator.toClient, coordinator.addChatMessage)
+
 end

@@ -117,7 +117,7 @@ scene.drawui = function()
     cursor.switchIf(b.left, nil)
 
     if scene.menu == "singleplayer" then
-      suit:Label("Todo", { noScaleX = true, noBox = true }, suit.layout:up())
+      mintHive.startSingleplayer()
       require("util.sceneManager").changeScene("scenes.game", "singleplayer")
     elseif scene.menu == "multiplayer" then
 

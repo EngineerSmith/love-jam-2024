@@ -6,11 +6,12 @@ local logger = require("util.logger")
 local ui = require("util.ui")
 
 local scene = { }
-scene.ui = require("scenes.game.ui")(scene)
 
 scene.load = function()
   scene.unloaded = false
   logger.info("Loading game scene")
+
+  scene.ui = require("scenes.game.ui")(scene)
 end
 
 scene.unload = function()
@@ -46,7 +47,9 @@ scene.resize = function(w, h)
   scene.ui.setScale(scene.scale)
 end
 
-scene.drawui = scene.ui.drawui
+scene.drawui = function()
+  scene.ui.drawui()
+end
 
 scene.draw = function()
   lg.clear(0,0,0)

@@ -6,7 +6,9 @@ return function(isClient, isServer)
       notification = { 120/255, 255/255,  30/255 },
       username =     {  80/255, 160/255, 255/255 },
       white =        { 255/255, 255/255, 255/255 },
-    }
+    },
+    toClient = "chatMessageClient",
+    toServer = "chatMessageServer",
   }
 
   chatCoordinator.chat.insert = function(message)

@@ -64,10 +64,10 @@ sceneManager.changeScene = function(sceneRequire, ...)
   sceneManager.currentScene = scene
   collectgarbage("collect")
   collectgarbage("collect")
+  love.load(...)
   if love.graphics then
     love.resize(love.graphics.getDimensions())
   end
-  love.load(...)
 end
 
 sceneManager.quit = function()
