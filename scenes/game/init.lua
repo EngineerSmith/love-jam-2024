@@ -47,6 +47,12 @@ scene.resize = function(w, h)
   scene.ui.setScale(scene.scale)
 end
 
+scene.update = function(dt)
+  if mintHive.isClient then
+    scene.ui.update(dt)
+  end
+end
+
 scene.drawui = function()
   scene.ui.drawui()
 end

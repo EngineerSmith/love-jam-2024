@@ -18,6 +18,10 @@ return function(scene)
     ui.fonts.subfont = uiUtil.getFont(14, "fonts.futile", scale)
   end
 
+  ui.update = function(dt)
+    ui.chat.update(dt)
+  end
+
   ui.drawui = function()
     suit:enterFrame(1)
   end

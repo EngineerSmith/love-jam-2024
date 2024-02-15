@@ -82,12 +82,12 @@ return function(ui)
         if not messages[i] then break end
         lg.print(messages[i], padding, lg.getHeight() - height*(i+1))
       end
-    elseif #chatCoordinator.chat ~= 0 and chatCoordinator.timeSinceLastMessage < 6 then
-      local alpha = chatBackground[4] * 1 -(chatCoordinator.timeSinceLastMessage - 5)
-      lg.setColor(chatBackground[1], chatBackground[2], chatBackground[3], alpha)
+    elseif #chatCoordinator.chat ~= 0 and chatCoordinator.timeSinceLastMessage < 8 then
+      lg.setColor(chatBackground)
       lg.rectangle("fill", -padding, lg.getHeight()*4, width+padding, height*4+padding, padding)
       local messages = formatMessages(font, width)
-      lg.setColor(chatTextColor)
+      local alpha = chatTextColor[4] * 1 -(chatCoordinator.timeSinceLastMessage - 7)
+      lg.setColor(chatTextColor[1], chatTextColor[2], chatTextColor[3], alpha)
       for i = 1, 3 do
         if not messages[i] then break end
         lg.print(messages[i], padding, lg.getHeight() - height*(i+1))
