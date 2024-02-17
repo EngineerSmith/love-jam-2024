@@ -65,7 +65,7 @@ server.send = function(client, type_, ...)
     return
   end
   server._channelIn:push({
-    type(client) == "table" and client.id or client,
+    type(client) == "table" and client.sessionID or client,
     serialize.encode(type_, ...),
   })
 end
@@ -82,7 +82,7 @@ server.sendChannel = function(channel, client, type_, ...)
   server._channelIn:push({
     "channel",
     channel,
-    type(client) == "table" and client.id or client,
+    type(client) == "table" and client.sessionID or client,
     serialize.encode(type_, ...),
   })
 end

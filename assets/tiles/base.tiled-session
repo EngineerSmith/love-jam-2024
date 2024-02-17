@@ -1,0 +1,64 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "lobby.tmx#pressure_plate": {
+            "scaleInEditor": 1
+        },
+        "map.tmx": {
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 199.66666666666669,
+                "y": 178.16666666666663
+            }
+        },
+        "map.tmx#floor": {
+            "scaleInDock": 1
+        },
+        "map.tmx#walls": {
+            "scaleInDock": 1
+        },
+        "map.tmx#walls_small": {
+            "scaleInDock": 1,
+            "scaleInEditor": 11
+        },
+        "pressure_plate.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "walls_small.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/git/love-jam-2024/assets/tiles",
+    "last.externalTilesetPath": "C:/git/love-jam-2024/assets/tiles",
+    "last.imagePath": "C:/git/love-jam-2024/assets/tiles",
+    "last.objectTemplatePath": "C:/git/love-jam-2024/assets/tiles",
+    "map.lastUsedExportFilter": "Lua files (*.lua)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+    ],
+    "project": "base.tiled-project",
+    "recentFiles": [
+        "pressure_plate.tsx",
+        "walls_small.tsx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
