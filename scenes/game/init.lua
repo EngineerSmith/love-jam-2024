@@ -5,13 +5,18 @@ local settings = require("util.settings")
 local logger = require("util.logger")
 local ui = require("util.ui")
 
-local scene = { }
+local scene = { 
+  cameraScale = 2
+}
 
 scene.load = function()
   scene.unloaded = false
   logger.info("Loading game scene")
 
   scene.ui = require("scenes.game.ui")(scene)
+  scene.world = require("scenes.game.world")(scene)
+
+  scene.world.load()
 end
 
 scene.unload = function()
@@ -45,11 +50,19 @@ scene.resize = function(w, h)
 
   -- scale UI
   scene.ui.setScale(scene.scale)
+  -- Camera
+  local x, y = 0, 0 -- character position
+  scene.camera = require("libs.stalker-x")(x, y, tw*scene.scale, th*scene.scale, scene.scale*scene.cameraScale)
+  --scene.camera.draw_deadzone = true
+  --scene.camera:setFollowLerp(0.1)
+  --scene.camera:setFollowStyle("LOCKON")
 end
 
 scene.update = function(dt)
   if mintHive.isClient() then
     scene.ui.update(dt)
+    scene.world.update(dt)
+    scene.camera:update(dt)
   end
 end
 
@@ -59,10 +72,28 @@ end
 
 scene.draw = function()
   lg.clear(0,0,0)
+  scene.camera:attach()
+  lg.push()
+    scene.world.draw()
+  lg.pop()
+  scene.camera:detach()
+  scene.camera:draw()
   scene.ui.draw()
 end
 
 scene.keypressed = function(_, scancode)
+  -- DEBUG
+  local camera = scene.camera
+  if scancode == "left" then
+    camera.x = camera.x - 10
+  elseif scancode == "right" then
+    camera.x = camera.x + 10
+  elseif scancode == "up" then
+    camera.y = camera.y - 10
+  elseif scancode == "down" then
+    camera.y = camera.y + 10
+  end
+  -- DEBUG
   local handled = scene.ui.keypressed(scancode)
   if handled then return end
 end

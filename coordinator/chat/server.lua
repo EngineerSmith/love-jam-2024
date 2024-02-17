@@ -1,7 +1,7 @@
 local logger = require("util.logger")
 local utf8 = require("utf8")
 
-local network = require("libs.MintHive.server")
+local network = require("libs.MintHive").server
 
 return function(coordinator)
   coordinator.serverSendChatMessage = function(message)
