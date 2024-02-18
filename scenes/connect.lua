@@ -36,7 +36,7 @@ mintHive.client.addHandler("login", function(...)
   if not scene.unloaded then
     require("util.sceneManager").changeScene("scenes.game")
   end
-end)
+end
 
 mintHive.client.addHandler("disconnect", function(reason)
   if not scene.unloaded then
