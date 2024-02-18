@@ -1,3 +1,5 @@
+dt = love.timer.getDelta() -- for update functions outside love.update though im not sure if this make sense lol
+
 local logger = require("util.logger")
 
 if love._version_major ~= 12 then
