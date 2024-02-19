@@ -13,15 +13,11 @@ local quad_plate_pressed = lg.newQuad(16, 0, 16, 16, 32, 16)
 return function(coordinator)
 
   network.addHandler("loadMap",  function(map)
-    coordinator.map = sti(map)
+    coordinator.map = sti(map, { "box2d" })
+    coordinator.box2d = love.physics.newWorld(0, 0, true)
+    coordinator.map:box2d_init(coordinator.box2d)
     coordinator.formatMap(coordinator.map)
   end)
-
-  coordinator.update = function(dt)
-    if coordinator.map then
-      coordinator.map:update(dt)
-    end
-  end
 
   coordinator.drawPlate = function(plate, scaleX, scaleY)
     local quad = plate.pressed and quad_plate_pressed or quad_plate_unpressed
@@ -31,6 +27,7 @@ return function(coordinator)
   coordinator.draw = function()
     if coordinator.map then
       coordinator.map:draw()
+      coordinator.map:box2d_draw()
     end
   end
 

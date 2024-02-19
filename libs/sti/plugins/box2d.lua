@@ -25,38 +25,34 @@ return {
 		}
 
 		local function addObjectToWorld(objshape, vertices, userdata, object)
-			local shape
-
+			local bodyType = "static"
+			if userdata.properties.dynamic then
+				bodyType = "dynamic"
+			elseif userdata.properties.static then
+				bodyType = "static"
+			elseif userdata.properties.kinematic then
+				bodyType = "kinematic"
+			end
+			
+			local body
 			if objshape == "polyline" then
 				if #vertices == 4 then
-					shape = love.physics.newEdgeShape(unpack(vertices))
+					body = love.physics.newEdgeBody(world, bodyType, vertices)
 				else
-					shape = love.physics.newChainShape(false, unpack(vertices))
+					body = love.physics.newChainBody(world, bodyType, false, vertices)
 				end
 			else
-				shape = love.physics.newPolygonShape(unpack(vertices))
+				body = love.physics.newPolygonBody(world, bodyType, vertices)
 			end
 
-			local currentBody = body
-			--dynamic are objects/players etc.
-			if userdata.properties.dynamic == true then
-				currentBody = love.physics.newBody(world, map.offsetx, map.offsety, 'dynamic')
-			-- static means it shouldn't move. Things like walls/ground.
-			elseif userdata.properties.static == true then
-				currentBody = love.physics.newBody(world, map.offsetx, map.offsety, 'static')
-			-- kinematic means that the object is static in the game world but effects other bodies
-			elseif userdata.properties.kinematic == true then
-				currentBody = love.physics.newBody(world, map.offsetx, map.offsety, 'kinematic')			
-			end
+			body:setUserData(userdata)
 
-			local fixture = love.physics.newFixture(currentBody, shape)
-			fixture:setUserData(userdata)
-
+			local shape = body:getShape()
 			-- Set some custom properties from userdata (or use default set by box2d)
-			fixture:setFriction(userdata.properties.friction       or 0.2)
-			fixture:setRestitution(userdata.properties.restitution or 0.0)
-			fixture:setSensor(userdata.properties.sensor           or false)
-			fixture:setFilterData(
+			shape:setFriction(userdata.properties.friction       or 0.2)
+			shape:setRestitution(userdata.properties.restitution or 0.0)
+			shape:setSensor(userdata.properties.sensor           or false)
+			shape:setFilterData(
 				userdata.properties.categories or 1,
 				userdata.properties.mask       or 65535,
 				userdata.properties.group      or 0
@@ -64,9 +60,8 @@ return {
 
 			local obj = {
 				object  = object,
-				body    = currentBody,
-				shape   = shape,
-				fixture = fixture,
+				body    = body,
+				shape = shape,
 			}
 
 			table.insert(collision, obj)
@@ -276,7 +271,6 @@ return {
 			local obj = collision[i]
 
 			if obj.object.layer == layer then
-				obj.fixture:destroy()
 				table.remove(collision, i)
 			end
 		end

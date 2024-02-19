@@ -57,7 +57,6 @@ local baseConf = function(t)
 
   t.modules.touch   = false
   t.modules.video   = false
-  t.modules.physics = false
 end
 
 if args["--server"] then
@@ -69,12 +68,13 @@ if args["--server"] then
 
     t.window = nil
 
-    t.modules.data   = true
-    t.modules.event  = true
-    t.modules.math   = true
-    t.modules.system = true
-    t.modules.thread = true
-    t.modules.timer  = true
+    t.modules.data    = true
+    t.modules.event   = true
+    t.modules.math    = true
+    t.modules.physics = true
+    t.modules.system  = true
+    t.modules.thread  = true
+    t.modules.timer   = true
 
     t.modules.audio    = false
     t.modules.font     = false
@@ -116,6 +116,7 @@ else
     t.modules.keyboard = true
     t.modules.math     = true
     t.modules.mouse    = true
+    t.modules.physics  = true
     t.modules.system   = true
     t.modules.thread   = true
     t.modules.timer    = true

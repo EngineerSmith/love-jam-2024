@@ -11,9 +11,7 @@ return function (scene)
   end
 
   world.update = function(dt)
-    if mintHive.isClient() then
-      world.worldcoordinator.update(dt)
-    end
+    world.worldcoordinator.update(dt)
   end
 
   world.draw = function()

@@ -24,7 +24,7 @@ return function(isClient, isServer)
       table.insert(worldInteractables.plates, {
         x = plate.x,
         y = plate.y,
-        pressed = true
+        pressed = false
       })
     end
 
@@ -39,6 +39,13 @@ return function(isClient, isServer)
     local success = pcall(map.removeLayer, map, "Interactable")
     if not success  then 
       logger.warn("Could not remove 'Interactable' layer")
+    end
+  end
+
+  worldCoordinator.update = function(dt)
+    if worldCoordinator.map then
+      worldCoordinator.box2d:update(dt)
+      worldCoordinator.map:update(dt)
     end
   end
 

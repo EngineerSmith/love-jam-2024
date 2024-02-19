@@ -11,7 +11,9 @@ return function(coordinator)
 
   coordinator.setWorld = function(mapLocation)
     coordinator.mapLocation = mapLocation
-    coordinator.map = sti(mapLocation)
+    coordinator.map = sti(mapLocation, { "box2d" })
+    coordinator.box2d = love.physics.newWorld(0, 0, true)
+    coordinator.map:box2d_init(coordinator.box2d)
     if not mintHive.isSingleplayer then
       network.sendAll("loadMap", mapLocation)
     end

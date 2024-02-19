@@ -59,9 +59,9 @@ scene.resize = function(w, h)
 end
 
 scene.update = function(dt)
+  scene.world.update(dt)
   if mintHive.isClient() then
     scene.ui.update(dt)
-    scene.world.update(dt)
     scene.camera:update(dt)
   end
 end
