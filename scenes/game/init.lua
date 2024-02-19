@@ -10,6 +10,9 @@ local scene = {
 }
 
 scene.load = function()
+  Character = require 'Character' -- character OOP file / the blueprint of all characters
+  player1 = Character.new(self,'line',0,0,0,0,0,50,50,50) -- Player 1
+
   scene.unloaded = false
   logger.info("Loading game scene")
 
@@ -61,6 +64,7 @@ end
 scene.update = function(dt)
   scene.world.update(dt)
   if mintHive.isClient() then
+    player1:update(dt)
     scene.ui.update(dt)
     scene.camera:update(dt)
   end
@@ -75,6 +79,7 @@ scene.draw = function()
   scene.camera:attach()
   lg.push()
     scene.world.draw()
+    player1:draw()
   lg.pop()
   scene.camera:detach()
   scene.camera:draw()
